@@ -54,3 +54,50 @@ describe('the adding clients to stylists path', {:type => :feature}) do
     expect(page).to have_content("James")
   end
 end
+
+describe('the changing clients name path', {:type => :feature}) do
+  it("changes the name of a client") do
+    client = Client.new({name: "James", id: nil, stylist_id: 0})
+    client.save()
+    visit('/')
+    click_link("James")
+    fill_in('name', :with => "Joe")
+    click_button('Change')
+    expect(page).to have_content("Joe")
+  end
+end
+
+describe('the deleting clients path', {:type => :feature}) do
+  it("deletes a client") do
+    client = Client.new({name: "James", id: nil, stylist_id: 0})
+    client.save()
+    visit('/')
+    click_link("James")
+    click_button('Delete')
+    expect(page).to have_no_content('James')
+  end
+end
+
+
+describe('the changing stylists name path', {:type => :feature}) do
+  it("changes the name of a stylist") do
+    stylist = Stylist.new({name: "Ruby", id: nil})
+    stylist.save()
+    visit('/')
+    click_link("Ruby")
+    fill_in('name', :with => "Janna")
+    click_button('Change')
+    expect(page).to have_content("Janna")
+  end
+end
+
+describe('the deleting stylsits path', {:type => :feature}) do
+  it("deletes a stylist") do
+    stylist = Stylist.new({name: "Ruby", id: nil})
+    stylist.save()
+    visit('/')
+    click_link("Ruby")
+    click_button("Delete")
+    expect(page).to have_no_content('Ruby')
+  end
+end
