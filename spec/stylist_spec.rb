@@ -59,4 +59,22 @@ describe(Stylist) do
       expect(Stylist.find(stylist.id())).to(eq(stylist))
     end
   end
+
+  describe("#update") do
+    it("lets you update a stylists name") do
+      stylist = Stylist.new({name: "Rosey", id: nil})
+      stylist.save()
+      stylist.update("Jane")
+      expect(stylist.name()).to(eq("Jane"))
+    end
+  end
+
+  describe("#delete") do
+    it("lets you delete a stylist") do
+      stylist = Stylist.new({name: "Rosey", id: nil})
+      stylist.save()
+      stylist.delete()
+      expect(Stylist.all()).to(eq([]))
+    end
+  end
 end

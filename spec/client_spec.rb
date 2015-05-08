@@ -8,7 +8,7 @@ describe(Client) do
   end
 
   describe("#name") do
-    it("tells you a stylist's name") do
+    it("tells you a client's name") do
       client = Client.new({name: "George", id: nil, stylist_id: 1})
       expect(client.name()).to(eq("George"))
     end
@@ -37,4 +37,22 @@ describe(Client) do
       expect(Client.all()).to(eq([client]))
     end
   end
-end 
+
+  describe("#update") do
+    it("lets you update a clients name") do
+      client = Client.new({name: "George", id: nil, stylist_id: 1})
+      client.save()
+      client.update("James")
+      expect(client.name()).to(eq("James"))
+    end
+  end
+
+  describe("#delete") do
+    it("lets you delete a client") do
+      client = Client.new({name: "George", id: nil, stylist_id: 1})
+      client.save()
+      client.delete()
+      expect(Client.all()).to(eq([]))
+    end
+  end
+end
