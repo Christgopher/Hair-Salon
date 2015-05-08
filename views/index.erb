@@ -1,0 +1,27 @@
+<h1> Welcome to the H.S.M.S</h1>
+<h4> (Hair Salon Managment System) </h4>
+<br>
+<hr>
+
+<h3>Here is a list of your stylists:</h3>
+
+<% if @stylists.any?() %>
+  <ul>
+    <% @stylists.each() do |stylist| %>
+      <li><a href="/stylist/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p> You don't appear to have added any stylists! </p>
+<% end %>
+<br>
+<h4>Add a stylist here:</h4>
+<form action="/stylists" method="post">
+  <label for="stylist_name">Stylists name:</label>
+  <input id="stylist_name" name="stylist_name" type="text">
+
+  <button type="submit">Add Stylist</button>
+</form>
+
+<hr>
+<h3>Here is a list of your clients:</h3>
