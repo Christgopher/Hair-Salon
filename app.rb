@@ -72,7 +72,7 @@ patch('/client_edit/:id') do
   client_id = params.fetch("id").to_i()
   @client = Client.find(client_id)
   name = params.fetch("name")
-  @client.update(name)
+  @client.update({name: name})
   erb(:client)
 end
 
