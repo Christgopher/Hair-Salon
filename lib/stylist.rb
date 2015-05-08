@@ -27,4 +27,18 @@ class Stylist
   define_method(:==) do |other|
     self.name() == (other.name()) && self.id() == (other.id())
   end
+
+  define_method(:clients) do
+    returned_clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id};")
+    all_clients = []
+
+    returned_clients.each() do |client|
+      name = client.fetch("name")
+      id = client.fetch("id").to_i()
+      stylist_id = client.fetch("stylist_id").to_i()
+      all_clients.push(Client.new({name: name, id:  id, stylist_id: stylist_id}))
+    end
+
+    all_clients
+  end
 end

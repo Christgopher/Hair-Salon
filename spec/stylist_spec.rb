@@ -37,4 +37,16 @@ describe(Stylist) do
       expect(Stylist.all()).to(eq([stylist]))
     end
   end
+
+  describe("#clients") do
+    it("shows all clients of a stylist") do
+      stylist = Stylist.new({name: "Rosey", id: nil})
+      stylist.save()
+      client1 = Client.new({name: "Philip", id: nil, stylist_id: stylist.id()})
+      client1.save()
+      client2 = Client.new({name: "George", id: nil, stylist_id: stylist.id()})
+      client2.save()
+      expect(stylist.clients()).to(eq([client1, client2]))
+    end
+  end
 end
