@@ -1,4 +1,3 @@
-<h3> Here are <%= @stylist.name() %>'s clients</h3>
 
 <h3>Here is a list of your clients:</h3>
 
@@ -19,7 +18,3 @@
 
   <button type="submit">Add Client</button>
 </form>
-<br>
-<br>
-<br>
-<a href="/">Back</a>

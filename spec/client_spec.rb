@@ -38,12 +38,29 @@ describe(Client) do
     end
   end
 
+  describe(".find") do
+    it("returns a client by its id") do
+      client = Client.new({name: "George", id: nil, stylist_id: 1})
+      client.save()
+      stylist2 = Client.new({name: "James", id: nil, stylist_id: 1})
+      stylist2.save()
+      expect(Client.find(client.id())).to(eq(client))
+    end
+  end
+
   describe("#update") do
     it("lets you update a clients name") do
       client = Client.new({name: "George", id: nil, stylist_id: 1})
       client.save()
-      client.update("James")
+      client.update({name: "James"})
       expect(client.name()).to(eq("James"))
+    end
+
+    it("lets you update a clients stylist_id") do
+      client = Client.new({name: "George", id: nil, stylist_id: 1})
+      client.save()
+      client.update({stylist_id: 2})
+      expect(client.stylist_id()).to(eq(2))
     end
   end
 

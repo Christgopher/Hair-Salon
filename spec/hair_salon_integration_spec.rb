@@ -22,3 +22,21 @@ describe('the adding stylists path', {:type => :feature}) do
     expect(page).to have_content("Rosey")
   end
 end
+
+describe('the listing clients path', {:type => :feature}) do
+  it("displays a list of client") do
+    client = Client.new({name: "James", id: nil, stylist_id: 0})
+    client.save()
+    visit('/')
+    expect(page).to have_content(client.name())
+  end
+end
+
+describe('the adding clients path', {:type => :feature}) do
+  it("adds a client") do
+    visit('/')
+    fill_in('client_name', :with => "James")
+    click_button('Add Client')
+    expect(page).to have_content("James")
+  end
+end
