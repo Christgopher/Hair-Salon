@@ -1,25 +1,30 @@
-<h3> Here are <%= @stylist.name() %>'s clients</h3>
+<h2> Here are <%= @stylist.name() %>'s clients</h2>
 
-<h3>Here is a list of your clients:</h3>
+<%  if @stylist.clients().any?() %>
+  <ul>
+    <% @stylist.clients().each() do |client| %>
+    <li>Name: <%= client.name() %>.</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This stylist doesn't appear to have any clients!</p>
+<% end %>
 
 <% if @clients.any?() %>
-<ul>
-  <% @clients.each() do |client| %>
-  <li><a href="/client/<%= client.id() %>"><%= client.name() %></a></li>
-  <% end %>
-</ul>
-<% else %>
-<p> You don't appear to have added any clients! </p>
-<% end %>
-<br>
-<h4>Add a client here:</h4>
-<form action="/clients" method="post">
-  <label for="client_name">Clients name:</label>
-  <input id="client_name" name="client_name" type="text">
+<h4>Add a client</h4>
 
-  <button type="submit">Add Client</button>
+<form action="/stylist/<%= @stylist.id() %>" method="post">
+  <input type ="hidden" name = "_method" value="patch">
+
+  <label for="client_id">Select a Client</label>
+  <select id='client_id' name='client_id' type='text'>
+    <% @clients.each() do |client| %>
+    <option value="<%= client.id()%>"> <%= client.name() %> </option>
+    <% end %>
+  </select>
+
+  <button type = "submit"> Add </button>
 </form>
-<br>
-<br>
-<br>
+<% end %>
+
 <a href="/">Back</a>

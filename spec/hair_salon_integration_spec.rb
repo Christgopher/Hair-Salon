@@ -40,3 +40,17 @@ describe('the adding clients path', {:type => :feature}) do
     expect(page).to have_content("James")
   end
 end
+
+describe('the adding clients to stylists path', {:type => :feature}) do
+  it("adds a client to a stylist") do
+    client = Client.new({name: "James", id: nil, stylist_id: 0})
+    client.save()
+    stylist = Stylist.new({name: "Rosey", id: nil})
+    stylist.save()
+    visit('/')
+    click_link("Rosey")
+    select("James")
+    click_button('Add')
+    expect(page).to have_content("James")
+  end
+end
