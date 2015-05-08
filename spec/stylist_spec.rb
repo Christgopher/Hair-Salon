@@ -49,4 +49,14 @@ describe(Stylist) do
       expect(stylist.clients()).to(eq([client1, client2]))
     end
   end
+
+  describe(".find") do
+    it("returns a stylist by its id") do
+      stylist = Stylist.new({name: "Rosey", id: nil})
+      stylist.save()
+      stylist2 = Stylist.new({name: "Jane", id: nil})
+      stylist2.save()
+      expect(Stylist.find(stylist.id())).to(eq(stylist))
+    end
+  end
 end

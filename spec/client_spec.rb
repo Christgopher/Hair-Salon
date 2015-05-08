@@ -37,4 +37,4 @@ describe(Client) do
       expect(Client.all()).to(eq([client]))
     end
   end
-end
+end 
